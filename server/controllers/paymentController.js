@@ -6,7 +6,7 @@ const getAllPayments = async (req, res) => {
     const { account_id } = req.params;
     
     const [rows] = await db.query(
-      'SELECT * FROM payment WHERE account_id = ? ORDER BY paid_at DESC',
+      'SELECT * FROM payments WHERE account_id = ? ORDER BY paid_at DESC',
       [account_id]
     );
 
@@ -22,7 +22,7 @@ const getPaymentById = async (req, res) => {
   try {
     const { id } = req.params;
     const [rows] = await db.query(
-      'SELECT * FROM payment WHERE payment_id = ?',
+      'SELECT * FROM payments WHERE payment_id = ?',
       [id]
     );
 
@@ -52,18 +52,18 @@ const createPayment = async (req, res) => {
 
     // Insert payment record
     const [result] = await db.query(
-      'INSERT INTO payment (account_id, amount_paid, paypal_reference) VALUES (?, ?, ?)',
+      'INSERT INTO payments (account_id, amount_paid, paypal_reference) VALUES (?, ?, ?)',
       [account_id, parseFloat(amount_paid), paypal_reference]
     );
 
     // Update account balance (reduce balance)
     await db.query(
-      'UPDATE accounts SET account_balance = account_balance - ? WHERE id = ?',
+      'UPDATE accounts SET balance = balance - ? WHERE id = ?',
       [parseFloat(amount_paid), account_id]
     );
 
     const [newPayment] = await db.query(
-      'SELECT * FROM payment WHERE payment_id = ?',
+      'SELECT * FROM payments WHERE payment_id = ?',
       [result.insertId]
     );
 
@@ -123,7 +123,7 @@ const deletePayment = async (req, res) => {
     const { id } = req.params;
 
     const [result] = await db.query(
-      'DELETE FROM payment WHERE payment_id = ?',
+      'DELETE FROM payments WHERE payment_id = ?',
       [id]
     );
 

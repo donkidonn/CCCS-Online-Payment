@@ -122,6 +122,19 @@ function Login() {
               {loading ? 'Logging in...' : 'Log in'}
             </button>
           </div>
+
+          {/* Register Link */}
+          <div className="text-center pt-4">
+            <p className="font-gordita text-white text-sm">
+              Don't have an account?{' '}
+              <Link 
+                to="/register" 
+                className="font-gordita-bold text-[#9B8B5F] hover:text-[#8a7a4f] underline transition-colors"
+              >
+                Register here
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </div>

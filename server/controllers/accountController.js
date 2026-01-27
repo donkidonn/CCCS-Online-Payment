@@ -211,10 +211,50 @@ const getAccountBalance = async (req, res) => {
   }
 };
 
+// Get comprehensive account balance data
+const getAccountBalanceDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Get account balance
+    const [accounts] = await db.query(
+      'SELECT balance FROM accounts WHERE id = ?',
+      [id]
+    );
+
+    if (accounts.length === 0) {
+      return res.status(404).json({ success: false, error: 'Account not found' });
+    }
+
+    // Get total amount paid from payments table
+    const [payments] = await db.query(
+      'SELECT COALESCE(SUM(amount_paid), 0) as total_paid FROM payments WHERE account_id = ?',
+      [id]
+    );
+
+    const totalBalance = accounts[0].balance || 0;
+    const totalPaid = parseFloat(payments[0].total_paid) || 0;
+    const amountPayable = totalBalance; // Amount still to be paid
+
+    res.json({ 
+      success: true, 
+      data: {
+        totalBalance: totalBalance,
+        totalPaid: totalPaid,
+        amountPayable: amountPayable
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching account balance details:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
   register,
   login,
   getAccount,
   updateAccount,
-  getAccountBalance
+  getAccountBalance,
+  getAccountBalanceDetails
 };

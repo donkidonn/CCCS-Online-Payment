@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import axios from 'axios';
 import logoGreen from '../assets/logos/logogreen.png';
+import studentFeatBg from '../assets/images/studentfeatbg.png';
 
 function Payment() {
   const navigate = useNavigate();
@@ -188,7 +189,7 @@ function Payment() {
         <div 
           className="flex-1 px-8 py-12 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/images/loginbg.png')",
+            backgroundImage: `url(${studentFeatBg})`,
           }}
         >
           <div className="max-w-4xl mx-auto">

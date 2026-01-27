@@ -286,7 +286,7 @@ function Register() {
 
           <p className="text-center text-white text-sm mt-4">
             Already have an account?{' '}
-            <Link to="/login" className="font-gordita-black underline hover:text-gray-200">
+            <Link to="/login" className="font-gordita-bold text-[#9B8B5F] hover:text-[#8a7a4f] underline transition-colors">
               Log in
             </Link>
           </p>

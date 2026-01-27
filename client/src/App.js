@@ -6,9 +6,9 @@ import Register from './pages/Register';
 import Confirmation from './pages/Confirmation';
 import PendingVerification from './pages/PendingVerification';
 import StudentHome from './pages/StudentHome';
-import Home from './pages/Home';
 import Payment from './pages/Payment';
-import Dashboard from './pages/Dashboard';
+import AccountBalance from './pages/AccountBalance';
+import TransactionHistory from './pages/TransactionHistory';
 
 function App() {
   return (
@@ -20,9 +20,9 @@ function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/pending-verification" element={<PendingVerification />} />
         <Route path="/student-home" element={<StudentHome />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/account-balance" element={<AccountBalance />} />
+        <Route path="/transaction-history" element={<TransactionHistory />} />
       </Routes>
     </Router>
   );

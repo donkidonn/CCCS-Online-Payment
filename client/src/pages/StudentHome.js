@@ -4,6 +4,7 @@ import logoGreen from '../assets/logos/logogreen.png';
 import historyLogo from '../assets/logos/historylogo.png';
 import paymentLogo from '../assets/logos/paymentlogo.png';
 import balanceLogo from '../assets/logos/balancelogo.png';
+import studentHomeBg from '../assets/images/studenthomebg.png';
 
 function StudentHome() {
   const navigate = useNavigate();
@@ -80,7 +81,7 @@ function StudentHome() {
       <div 
         className="flex-1 flex flex-col items-center justify-center px-8 py-8 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/loginbg.png')",
+          backgroundImage: `url(${studentHomeBg})`,
         }}
       >
 
