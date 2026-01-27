@@ -40,7 +40,7 @@ function Payment() {
 
   const fetchAccountBalance = async (accountId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/accounts/${accountId}/balance`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}/balance`);
       setAccountBalance(response.data.balance || 0);
     } catch (error) {
       console.error('Error fetching balance:', error);
@@ -105,7 +105,7 @@ function Payment() {
       const details = await actions.order.capture();
       
       // Save payment to database
-      const response = await axios.post('http://localhost:5000/api/payments', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/payments`, {
         account_id: user.id,
         amount_paid: paymentAmount,
         paypal_reference: details.id

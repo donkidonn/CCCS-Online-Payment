@@ -39,7 +39,7 @@ function AccountBalance() {
   const fetchAccountBalance = async (accountId) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/accounts/${accountId}/balance-details`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}/balance-details`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch account balance');

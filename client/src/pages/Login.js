@@ -24,7 +24,7 @@ function Login() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/accounts/login', formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/accounts/login`, formData);
       if (response.data.success) {
         // Store user data in localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user));
