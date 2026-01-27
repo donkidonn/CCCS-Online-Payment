@@ -9,10 +9,12 @@ import StudentHome from './pages/StudentHome';
 import Payment from './pages/Payment';
 import AccountBalance from './pages/AccountBalance';
 import TransactionHistory from './pages/TransactionHistory';
+import FloatingParticles from './components/FloatingParticles';
 
 function App() {
   return (
     <Router>
+      <FloatingParticles />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
