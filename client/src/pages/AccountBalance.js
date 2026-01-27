@@ -170,38 +170,48 @@ function AccountBalance() {
           </div>
         </div>
 
-        {/* Back Button */}
-        <div className="flex justify-end mt-12 md:mt-16">
+        {/* Action Buttons */}
+        <div className="flex justify-center items-center gap-8 mt-12 md:mt-16">
+          {/* Back Button */}
           <button
             onClick={handleBack}
-            className="group transition-all duration-300 hover:scale-110 active:scale-95"
+            className="group transition-all duration-300 hover:scale-110 active:scale-95 animate-fade-in-up animation-delay-600"
             aria-label="Go back"
           >
             <svg 
-              width="60" 
-              height="60" 
-              viewBox="0 0 60 60" 
+              width="70" 
+              height="70" 
+              viewBox="0 0 70 70" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
-              className="drop-shadow-lg"
+              className="drop-shadow-2xl"
             >
               <circle 
-                cx="30" 
-                cy="30" 
-                r="28" 
+                cx="35" 
+                cy="35" 
+                r="32" 
                 fill="white" 
                 stroke="#2F5233" 
-                strokeWidth="2"
-                className="group-hover:fill-gray-100 transition-colors"
+                strokeWidth="3"
+                className="group-hover:fill-gray-100 transition-all duration-300"
               />
               <path 
-                d="M35 20L25 30L35 40" 
+                d="M40 25L28 35L40 45" 
                 stroke="#2F5233" 
-                strokeWidth="3" 
+                strokeWidth="4" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
+                className="group-hover:stroke-[#9B8B5F] transition-colors duration-300"
               />
             </svg>
+          </button>
+
+          {/* Proceed to Payment Button */}
+          <button
+            onClick={() => navigate('/payment')}
+            className="bg-[#9B8B5F] hover:bg-[#8a7a4f] text-white font-gordita-bold px-12 py-5 rounded-full text-xl transition-all duration-300 shadow-2xl hover:shadow-[#9B8B5F]/50 hover:scale-110 active:scale-95 animate-fade-in-up animation-delay-600"
+          >
+            Proceed to payment
           </button>
         </div>
       </div>
