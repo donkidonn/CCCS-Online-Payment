@@ -56,9 +56,9 @@ function StudentHome() {
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
-          <a href="#" className="font-gordita-medium text-green-800 text-xs md:text-sm hover:text-green-600 transition-colors">
+          <button className="font-gordita-medium text-green-800 text-xs md:text-sm hover:text-green-600 transition-colors">
             Visit Portal
-          </a>
+          </button>
           <span className="text-gray-400">|</span>
           <button 
             onClick={handleLogout}
