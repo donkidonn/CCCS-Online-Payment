@@ -66,7 +66,7 @@ function Login() {
             Cordova Catholic Cooperative School
           </h1>
           <p className="font-garet text-white text-xl tracking-wider">
-            Finance Portal
+            Bursar Portal
           </p>
         </div>
       </div>

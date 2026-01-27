@@ -144,7 +144,7 @@ function Register() {
             className="w-100 h-100 md:w-108 md:h-96 object-contain drop-shadow-2xl"
           />
           <p className="font-garet text-white text-2xl tracking-wider">
-            Finance Portal
+            Bursar Portal
           </p>
         </div>
       </div>

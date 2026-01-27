@@ -30,7 +30,7 @@ function Landing() {
         
         {/* Subtitle */}
         <p className="font-garet text-white text-xl md:text-2xl mb-20 tracking-wider animate-fade-in-delay-2">
-          Finance Portal
+          Bursar Portal
         </p>
         
         {/* Buttons */}
