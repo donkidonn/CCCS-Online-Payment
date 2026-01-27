@@ -21,17 +21,17 @@ CREATE TABLE IF NOT EXISTS accounts (
   INDEX idx_role (role)
 );
 
--- Create payments table
-CREATE TABLE IF NOT EXISTS payments (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  amount DECIMAL(10, 2) NOT NULL,
-  description TEXT,
-  status VARCHAR(50) DEFAULT 'pending',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX idx_email (email),
-  INDEX idx_status (status),
-  INDEX idx_created_at (created_at)
+-- Create payment table
+CREATE TABLE IF NOT EXISTS payment (
+  payment_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  account_id BIGINT UNSIGNED NOT NULL,
+  amount_paid DECIMAL(10, 2) NOT NULL,
+  paid_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  paypal_reference VARCHAR(255) NULL,
+  FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE,
+  INDEX idx_account_id (account_id),
+  INDEX idx_paid_at (paid_at)
 );
+
+-- Add account_balance to accounts table if not exists
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS account_balance DECIMAL(10, 2) DEFAULT 0.00;

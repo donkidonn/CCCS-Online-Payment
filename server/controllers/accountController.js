@@ -190,9 +190,31 @@ const updateAccount = async (req, res) => {
   }
 };
 
+// Get account balance
+const getAccountBalance = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [accounts] = await db.query(
+      'SELECT balance FROM accounts WHERE id = ?',
+      [id]
+    );
+
+    if (accounts.length === 0) {
+      return res.status(404).json({ success: false, error: 'Account not found' });
+    }
+
+    res.json({ success: true, balance: accounts[0].balance || 0 });
+  } catch (error) {
+    console.error('Error fetching account balance:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
   register,
   login,
   getAccount,
-  updateAccount
+  updateAccount,
+  getAccountBalance
 };

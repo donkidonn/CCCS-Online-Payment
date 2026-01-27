@@ -1,10 +1,13 @@
 const db = require('../config/database');
 
-// Get all payments
+// Get all payments for an account
 const getAllPayments = async (req, res) => {
   try {
+    const { account_id } = req.params;
+    
     const [rows] = await db.query(
-      'SELECT * FROM payments ORDER BY created_at DESC'
+      'SELECT * FROM payment WHERE account_id = ? ORDER BY paid_at DESC',
+      [account_id]
     );
 
     res.json({ success: true, data: rows });
@@ -19,7 +22,7 @@ const getPaymentById = async (req, res) => {
   try {
     const { id } = req.params;
     const [rows] = await db.query(
-      'SELECT * FROM payments WHERE id = ?',
+      'SELECT * FROM payment WHERE payment_id = ?',
       [id]
     );
 
@@ -37,23 +40,30 @@ const getPaymentById = async (req, res) => {
 // Create new payment
 const createPayment = async (req, res) => {
   try {
-    const { name, email, amount, description } = req.body;
+    const { account_id, amount_paid, paypal_reference } = req.body;
 
     // Validation
-    if (!name || !email || !amount) {
+    if (!account_id || !amount_paid) {
       return res.status(400).json({ 
         success: false, 
-        error: 'Name, email, and amount are required' 
+        error: 'Account ID and amount are required' 
       });
     }
 
+    // Insert payment record
     const [result] = await db.query(
-      'INSERT INTO payments (name, email, amount, description, status) VALUES (?, ?, ?, ?, ?)',
-      [name, email, parseFloat(amount), description, 'pending']
+      'INSERT INTO payment (account_id, amount_paid, paypal_reference) VALUES (?, ?, ?)',
+      [account_id, parseFloat(amount_paid), paypal_reference]
+    );
+
+    // Update account balance (reduce balance)
+    await db.query(
+      'UPDATE accounts SET account_balance = account_balance - ? WHERE id = ?',
+      [parseFloat(amount_paid), account_id]
     );
 
     const [newPayment] = await db.query(
-      'SELECT * FROM payments WHERE id = ?',
+      'SELECT * FROM payment WHERE payment_id = ?',
       [result.insertId]
     );
 
@@ -113,7 +123,7 @@ const deletePayment = async (req, res) => {
     const { id } = req.params;
 
     const [result] = await db.query(
-      'DELETE FROM payments WHERE id = ?',
+      'DELETE FROM payment WHERE payment_id = ?',
       [id]
     );
 
@@ -132,6 +142,5 @@ module.exports = {
   getAllPayments,
   getPaymentById,
   createPayment,
-  updatePayment,
   deletePayment
 };
