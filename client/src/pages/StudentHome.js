@@ -152,7 +152,7 @@ function StudentHome() {
       {/* Footer */}
       <div className="bg-white py-2 px-8 text-center border-t-2 border-gray-200">
         <p className="font-gordita text-gray-600 text-[10px] md:text-xs">
-          Cordova Catholic Cooperative School Online Payment System. Powered by Cordova Catholic Cooperative School
+          © 2026 Cordova Catholic Cooperative School Online Payment System. All rights reserved
         </p>
       </div>
     </div>
