@@ -209,7 +209,7 @@ function AccountBalance() {
           {/* Proceed to Payment Button */}
           <button
             onClick={() => navigate('/payment')}
-            className="bg-[#9B8B5F] hover:bg-[#8a7a4f] text-white font-gordita-bold px-12 py-5 rounded-full text-xl transition-all duration-300 shadow-2xl hover:shadow-[#9B8B5F]/50 hover:scale-110 active:scale-95 animate-fade-in-up animation-delay-600"
+            className="bg-[#9B8B5F] hover:bg-[#8a7a4f] text-white font-gordita-bold text-lg py-4 px-12 rounded-full shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 animate-fade-in-up animation-delay-600"
           >
             Proceed to payment
           </button>
