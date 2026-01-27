@@ -38,25 +38,20 @@ function StudentHome() {
   }
 
   return (
-    <div 
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex flex-col relative"
-      style={{
-        backgroundImage: "url('/images/loginbg.png')",
-      }}
-    >
+    <div className="min-h-screen w-full flex flex-col">
       {/* Header with logo and Visit Portal link */}
       <div className="bg-white py-3 px-6 md:px-12 flex items-center justify-between shadow-lg border-b-4 border-green-700">
         <div className="flex items-center gap-3">
           <img 
             src={logoGreen}
             alt="CCCS Logo" 
-            className="w-14 h-14 object-contain"
+            className="w-16 h-16 object-contain"
           />
           <div>
             <h2 className="font-old-english text-green-800 text-lg md:text-xl leading-tight">
               Cordova Catholic Cooperative School
             </h2>
-            <p className="font-garet text-green-700 text-xs md:text-sm">Finance Cordova Academy</p>
+            <p className="font-garet text-green-700 text-xs md:text-sm">Formerly Cordova Academy</p>
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
@@ -73,27 +68,33 @@ function StudentHome() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-8 py-8">
-        {/* Welcome Message */}
-        <div className="text-center mb-8 animate-fade-in">
-          <h1 className="font-garet text-green-800 text-2xl md:text-3xl mb-1 drop-shadow-lg">Welcome,</h1>
-          <h2 className="font-old-english text-green-800 text-4xl md:text-5xl italic drop-shadow-lg">
-            ({user.First_name})!
-          </h2>
-        </div>
+      {/* Welcome Message Section - Above green background */}
+      <div className="bg-white py-6 text-center border-b-4 border-green-700">
+        <h1 className="font-old-english text-green-800 text-3xl md:text-7xl mb-1">Welcome,</h1>
+        <h2 className="font-gordita-bold text-green-700 text-4xl md:text-6xl italic font-bold">
+          {user.First_name}!
+        </h2>
+      </div>
+
+      {/* Main Content - Green Background */}
+      <div 
+        className="flex-1 flex flex-col items-center justify-center px-8 py-8 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/loginbg.png')",
+        }}
+      >
 
         {/* School Logo */}
         <div className="mb-10 animate-scale-in">
           <img 
             src="/logos/logowhite.png" 
             alt="CCCS Logo" 
-            className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl"
+            className="w-108 h-108 md:w-96 md:h-108 object-contain drop-shadow-2xl"
           />
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap justify-center gap-6 animate-fade-in-delay-2 max-w-4xl">
+        {/* Action Buttons - Straight Layout */}
+        <div className="flex items-center justify-center gap-6 animate-fade-in-delay-2 w-full max-w-4xl">
           {/* View History Button */}
           <button
             onClick={() => navigate('/transaction-history')}
@@ -106,7 +107,7 @@ function StudentHome() {
                 className="w-12 h-12 object-contain"
               />
             </div>
-            <span className="font-gordita-bold text-white text-center text-xs leading-tight">
+            <span className="font-gordita-bold text-white text-center text-sm leading-tight">
               View history of transactions
             </span>
           </button>
@@ -123,7 +124,7 @@ function StudentHome() {
                 className="w-12 h-12 object-contain"
               />
             </div>
-            <span className="font-gordita-bold text-white text-center text-xs leading-tight">
+            <span className="font-gordita-bold text-white text-center text-sm leading-tight">
               Make online payment
             </span>
           </button>
@@ -140,7 +141,7 @@ function StudentHome() {
                 className="w-12 h-12 object-contain"
               />
             </div>
-            <span className="font-gordita-bold text-white text-center text-xs leading-tight">
+            <span className="font-gordita-bold text-white text-center text-sm leading-tight">
               View account fees/balance
             </span>
           </button>
