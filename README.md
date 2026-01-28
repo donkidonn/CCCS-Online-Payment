@@ -17,11 +17,6 @@ A modern online payment system for Cordova Catholic Cooperative School built wit
 - Bcryptjs (Password hashing)
 - CORS, Helmet, Morgan
 
-**Get your Railway credentials:**
-- Go to your Railway project
-- Click on your MySQL database
-- Copy the connection details (Host, User, Password, Database)
-
 Start the server:
 ```bash
 npm run dev    # Development with nodemon
@@ -39,7 +34,22 @@ npm install
 
 Start the client:
 ```bash
+cd client
 npm start
 ```
 
+### 4. Server Setup
+```bash
+cd server
+npm install
+```
+
+Start the server
+```bash
+cd server
+npm run dev
+```
+
+
 The app will open at `http://localhost:3000`
+
