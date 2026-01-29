@@ -118,7 +118,7 @@ const AdminAddEditBalance = () => {
           <img src="/logos/logowhite.png" alt="CCCS Logo" className="h-10 w-10 md:h-16 md:w-16 rounded-full object-cover" />
           <div className="text-center">
             <h1 className="text-lg md:text-2xl font-serif">Cordova Catholic Cooperative School</h1>
-            <p className="text-xs md:text-sm">Finance Portal</p>
+            <p className="text-xs md:text-sm">Bursar Portal</p>
           </div>
         </div>
 
