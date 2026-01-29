@@ -21,7 +21,7 @@ const AdminAddEditBalance = () => {
   const fetchStudents = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/accounts/all-balances');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/all-balances`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -48,7 +48,7 @@ const AdminAddEditBalance = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/accounts/search-balances?query=${searchTerm}`
+        `${process.env.REACT_APP_API_URL}/api/accounts/search-balances?query=${searchTerm}`
       );
       const data = await response.json();
       setStudents(Array.isArray(data) ? data : []);
@@ -72,7 +72,7 @@ const AdminAddEditBalance = () => {
 
   const handleSave = async (studentId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/accounts/${studentId}/balance`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${studentId}/balance`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

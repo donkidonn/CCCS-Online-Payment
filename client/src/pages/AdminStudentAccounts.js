@@ -24,7 +24,7 @@ const AdminStudentAccounts = () => {
   const fetchAccounts = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/accounts/status/${activeTab}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/status/${activeTab}`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,7 +52,7 @@ const AdminStudentAccounts = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/accounts/search?query=${searchTerm}&status=${activeTab}`
+        `${process.env.REACT_APP_API_URL}/api/accounts/search?query=${searchTerm}&status=${activeTab}`
       );
       const data = await response.json();
       // Ensure data is an array
@@ -72,7 +72,7 @@ const AdminStudentAccounts = () => {
 
   const handleVerify = async (accountId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/accounts/${accountId}/verify`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}/verify`, {
         method: 'PUT',
       });
       if (response.ok) {
@@ -85,7 +85,7 @@ const AdminStudentAccounts = () => {
 
   const handleUnverify = async (accountId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/accounts/${accountId}/unverify`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}/unverify`, {
         method: 'PUT',
       });
       if (response.ok) {
@@ -98,7 +98,7 @@ const AdminStudentAccounts = () => {
 
   const handleDelete = async (accountId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/accounts/${accountId}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}`, {
         method: 'DELETE',
       });
       if (response.ok) {
