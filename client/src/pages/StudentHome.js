@@ -56,9 +56,9 @@ function StudentHome() {
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
-          <a href="#" className="font-gordita-medium text-green-800 text-xs md:text-sm hover:text-green-600 transition-colors">
+          <button className="font-gordita-medium text-green-800 text-xs md:text-sm hover:text-green-600 transition-colors">
             Visit Portal
-          </a>
+          </button>
           <span className="text-gray-400">|</span>
           <button 
             onClick={handleLogout}
@@ -152,7 +152,7 @@ function StudentHome() {
       {/* Footer */}
       <div className="bg-white py-2 px-8 text-center border-t-2 border-gray-200">
         <p className="font-gordita text-gray-600 text-[10px] md:text-xs">
-          Cordova Catholic Cooperative School Online Payment System. Powered by Cordova Catholic Cooperative School
+          © 2026 Cordova Catholic Cooperative School Online Payment System. All rights reserved
         </p>
       </div>
     </div>

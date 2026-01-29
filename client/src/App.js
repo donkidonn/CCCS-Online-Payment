@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -9,10 +9,14 @@ import StudentHome from './pages/StudentHome';
 import Payment from './pages/Payment';
 import AccountBalance from './pages/AccountBalance';
 import TransactionHistory from './pages/TransactionHistory';
+import AdminStudentAccounts from './pages/AdminStudentAccounts';
+import AdminAddEditBalance from './pages/AdminAddEditBalance';
+import FloatingParticles from './components/FloatingParticles';
 
 function App() {
   return (
     <Router>
+      <FloatingParticles />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
@@ -23,6 +27,8 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/account-balance" element={<AccountBalance />} />
         <Route path="/transaction-history" element={<TransactionHistory />} />
+        <Route path="/admin/student-accounts" element={<AdminStudentAccounts />} />
+        <Route path="/admin/add-edit-balance" element={<AdminAddEditBalance />} />
       </Routes>
     </Router>
   );

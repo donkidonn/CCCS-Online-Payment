@@ -1,0 +1,25 @@
+{
+  "short_name": "CCCS Portal",
+  "name": "CCCS Bursar Portal",
+  "icons": [
+    {
+      "src": "logos/logogreen.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/logogreen.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/logogreen.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2F5233",
+  "background_color": "#ffffff"
+}

@@ -24,13 +24,17 @@ function Login() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/accounts/login', formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/accounts/login`, formData);
       if (response.data.success) {
         // Store user data in localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user));
         
-        // Check if user is validated
-        if (response.data.user.Is_validated === false || response.data.user.Is_validated === 0) {
+        // Check if user is admin
+        if (response.data.user.role === 'admin') {
+          navigate('/admin/student-accounts');
+        }
+        // Check if user is validated student
+        else if (response.data.user.Is_validated === false || response.data.user.Is_validated === 0) {
           navigate('/pending-verification');
         } else {
           navigate('/student-home');
@@ -66,7 +70,7 @@ function Login() {
             Cordova Catholic Cooperative School
           </h1>
           <p className="font-garet text-white text-xl tracking-wider">
-            Finance Portal
+            Bursar Portal
           </p>
         </div>
       </div>

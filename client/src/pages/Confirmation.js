@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function Confirmation() {
@@ -21,7 +21,7 @@ function Confirmation() {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/accounts/register', formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/accounts/register`, formData);
       if (response.data.success) {
         setSuccess(true);
         setTimeout(() => {

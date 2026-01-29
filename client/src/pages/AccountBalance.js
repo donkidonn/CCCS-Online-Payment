@@ -39,7 +39,7 @@ function AccountBalance() {
   const fetchAccountBalance = async (accountId) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/accounts/${accountId}/balance-details`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}/balance-details`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch account balance');
@@ -98,7 +98,7 @@ function AccountBalance() {
             <h2 className="font-old-english text-green-800 text-lg md:text-xl leading-tight">
               Cordova Catholic Cooperative School
             </h2>
-            <p className="font-garet text-green-700 text-xs md:text-sm">Finance Portal</p>
+            <p className="font-garet text-green-700 text-xs md:text-sm">Bursar Portal</p>
           </div>
         </div>
         <div className="flex items-center gap-4 md:gap-6">
