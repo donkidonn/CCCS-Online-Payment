@@ -181,20 +181,20 @@ const AdminStudentAccounts = () => {
       )}
 
       {/* Header */}
-      <div className="text-white p-4 flex items-center justify-center" style={{ backgroundColor: '#2d5f3f' }}>
-        <div className="flex items-center gap-3">
-          <img src="/logos/logowhite.png" alt="CCCS Logo" className="h-16 w-16 rounded-full object-cover" />
+      <div className="text-white p-3 md:p-4 flex items-center justify-center" style={{ backgroundColor: '#2d5f3f' }}>
+        <div className="flex items-center gap-2 md:gap-3">
+          <img src="/logos/logowhite.png" alt="CCCS Logo" className="h-10 w-10 md:h-16 md:w-16 rounded-full object-cover" />
           <div className="text-center">
-            <h1 className="text-2xl font-serif">Cordova Catholic Cooperative School</h1>
-            <p className="text-sm">Bursar Portal</p>
+            <h1 className="text-lg md:text-2xl font-serif">Cordova Catholic Cooperative School</h1>
+            <p className="text-xs md:text-sm">Bursar Portal</p>
           </div>
         </div>
       </div>
 
       {/* Sidebar and Main Content */}
-      <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <div className="w-48 text-white min-h-screen" style={{ backgroundColor: '#1a3d2b' }}>
+      <div className="flex flex-col md:flex-row min-h-screen">
+        {/* Sidebar - Hidden on mobile */}
+        <div className="hidden md:block w-48 text-white min-h-screen" style={{ backgroundColor: '#1a3d2b' }}>
           <div className="p-4 flex items-center gap-3 border-b border-green-800">
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
               <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
@@ -237,14 +237,14 @@ const AdminStudentAccounts = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
-          <h2 className="text-3xl font-light italic mb-6 text-gray-700">Student accounts status</h2>
+        <div className="flex-1 p-4 md:p-8">
+          <h2 className="text-2xl md:text-3xl font-light italic mb-4 md:mb-6 text-gray-700">Student accounts status</h2>
 
           {/* Tabs */}
-          <div className="flex gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4 md:mb-6">
             <button
               onClick={() => setActiveTab('verified')}
-              className={`px-8 py-3 rounded-full font-medium transition-colors ${
+              className={`px-4 sm:px-8 py-3 rounded-full font-medium transition-colors text-sm sm:text-base ${
                 activeTab === 'verified'
                   ? 'text-white'
                   : 'bg-white text-gray-600 hover:bg-gray-50'
@@ -255,7 +255,7 @@ const AdminStudentAccounts = () => {
             </button>
             <button
               onClick={() => setActiveTab('unverified')}
-              className={`px-8 py-3 rounded-full font-medium border-2 transition-colors ${
+              className={`px-4 sm:px-8 py-3 rounded-full font-medium border-2 transition-colors text-sm sm:text-base ${
                 activeTab === 'unverified'
                   ? 'bg-white border-gray-600 text-gray-700'
                   : 'bg-white border-gray-300 text-gray-600 hover:border-gray-400'
@@ -266,27 +266,27 @@ const AdminStudentAccounts = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="bg-white p-6 rounded-lg shadow-sm mb-6">
-            <div className="flex items-center gap-4">
-              <label className="font-medium text-gray-700 whitespace-nowrap">Name/LRN:</label>
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm mb-4 md:mb-6">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+              <label className="font-medium text-gray-700 whitespace-nowrap text-sm sm:text-base">Name/LRN:</label>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
                 placeholder="Search by name or LRN..."
               />
               <button
                 onClick={handleSearch}
-                className="px-6 py-2 text-white rounded font-medium hover:opacity-90"
+                className="px-4 sm:px-6 py-2 text-white rounded font-medium hover:opacity-90 text-sm sm:text-base"
                 style={{ backgroundColor: '#7a9b6f' }}
               >
                 Search
               </button>
               <button
                 onClick={handleClear}
-                className="px-6 py-2 text-white rounded font-medium hover:opacity-90"
+                className="px-4 sm:px-6 py-2 text-white rounded font-medium hover:opacity-90 text-sm sm:text-base"
                 style={{ backgroundColor: '#7a9b6f' }}
               >
                 Clear
@@ -295,8 +295,8 @@ const AdminStudentAccounts = () => {
           </div>
 
           {/* Table */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <table className="w-full">
+          <div className="bg-white rounded-lg shadow-sm overflow-x-auto">
+            <table className="w-full min-w-[640px]">
               <thead>
                 <tr className="bg-gray-200">
                   <th className="px-4 py-3 text-left font-medium text-gray-700 border-r border-gray-300">#</th>
@@ -333,19 +333,19 @@ const AdminStudentAccounts = () => {
                         {formatDate(account.created_at)}
                       </td>
                       <td className="px-4 py-3">
-                        <div className="flex gap-2">
+                        <div className="flex gap-1 sm:gap-2">
                           {activeTab === 'verified' ? (
                             <>
                               <button
                                 onClick={() => openModal('unverify', account)}
-                                className="px-4 py-1.5 text-white rounded text-sm font-medium hover:opacity-90"
+                                className="px-2 sm:px-4 py-1.5 text-white rounded text-xs sm:text-sm font-medium hover:opacity-90"
                                 style={{ backgroundColor: '#7a9b6f' }}
                               >
                                 Unverify
                               </button>
                               <button
                                 onClick={() => openModal('delete', account)}
-                                className="px-4 py-1.5 text-white rounded text-sm font-medium hover:opacity-90"
+                                className="px-2 sm:px-4 py-1.5 text-white rounded text-xs sm:text-sm font-medium hover:opacity-90"
                                 style={{ backgroundColor: '#7a9b6f' }}
                               >
                                 Delete
@@ -355,14 +355,14 @@ const AdminStudentAccounts = () => {
                             <>
                               <button
                                 onClick={() => handleVerify(account.id)}
-                                className="px-4 py-1.5 text-white rounded text-sm font-medium hover:opacity-90"
+                                className="px-2 sm:px-4 py-1.5 text-white rounded text-xs sm:text-sm font-medium hover:opacity-90"
                                 style={{ backgroundColor: '#7a9b6f' }}
                               >
                                 Verify
                               </button>
                               <button
                                 onClick={() => openModal('delete', account)}
-                                className="px-4 py-1.5 text-white rounded text-sm font-medium hover:opacity-90"
+                                className="px-2 sm:px-4 py-1.5 text-white rounded text-xs sm:text-sm font-medium hover:opacity-90"
                                 style={{ backgroundColor: '#7a9b6f' }}
                               >
                                 Delete
