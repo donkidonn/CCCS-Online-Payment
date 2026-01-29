@@ -18,6 +18,7 @@ const AdminStudentAccounts = () => {
       setAdminUser(JSON.parse(userData));
     }
     fetchAccounts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const fetchAccounts = async () => {
@@ -210,7 +211,7 @@ const AdminStudentAccounts = () => {
 
           <nav className="mt-4">
             <a
-              href="#"
+              href="/admin/student-accounts"
               className="flex items-center gap-3 px-4 py-3 hover:bg-green-800"
               style={{ backgroundColor: '#2d5f3f' }}
             >

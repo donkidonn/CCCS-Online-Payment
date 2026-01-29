@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 const AdminAddEditBalance = () => {
-  const navigate = useNavigate();
   const [students, setStudents] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
@@ -143,7 +141,7 @@ const AdminAddEditBalance = () => {
               <span>Student accounts</span>
             </a>
             <a
-              href="#"
+              href="/admin/add-edit-balance"
               className="flex items-center gap-3 px-4 py-3 hover:bg-green-800"
               style={{ backgroundColor: '#2d5f3f' }}
             >
