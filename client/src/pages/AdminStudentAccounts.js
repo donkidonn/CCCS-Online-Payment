@@ -10,6 +10,7 @@ const AdminStudentAccounts = () => {
   const [modalAction, setModalAction] = useState(null);
   const [selectedAccount, setSelectedAccount] = useState(null);
   const [adminUser, setAdminUser] = useState(null);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     // Get admin user data from localStorage
@@ -181,20 +182,46 @@ const AdminStudentAccounts = () => {
       )}
 
       {/* Header */}
-      <div className="text-white p-3 md:p-4 flex items-center justify-center" style={{ backgroundColor: '#2d5f3f' }}>
+      <div className="text-white p-3 md:p-4 flex items-center justify-between md:justify-center" style={{ backgroundColor: '#2d5f3f' }}>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          className="md:hidden p-2 hover:bg-green-700 rounded"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
         <div className="flex items-center gap-2 md:gap-3">
           <img src="/logos/logowhite.png" alt="CCCS Logo" className="h-10 w-10 md:h-16 md:w-16 rounded-full object-cover" />
           <div className="text-center">
             <h1 className="text-lg md:text-2xl font-serif">Cordova Catholic Cooperative School</h1>
-            <p className="text-xs md:text-sm">Bursar Portal</p>
+            <p className="text-xs md:text-sm">Finance Portal</p>
           </div>
         </div>
+
+        {/* Spacer for mobile to center logo */}
+        <div className="md:hidden w-10"></div>
       </div>
 
       {/* Sidebar and Main Content */}
       <div className="flex flex-col md:flex-row min-h-screen">
-        {/* Sidebar - Hidden on mobile */}
-        <div className="hidden md:block w-48 text-white min-h-screen" style={{ backgroundColor: '#1a3d2b' }}>
+        {/* Mobile Menu Overlay */}
+        {showMobileMenu && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+            onClick={() => setShowMobileMenu(false)}
+          ></div>
+        )}
+
+        {/* Sidebar */}
+        <div
+          className={`fixed md:relative z-50 md:z-0 w-64 md:w-48 text-white min-h-screen transform transition-transform duration-300 md:transform-none ${
+            showMobileMenu ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+          }`}
+          style={{ backgroundColor: '#1a3d2b' }}
+        >
           <div className="p-4 flex items-center gap-3 border-b border-green-800">
             <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
               <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
