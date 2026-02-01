@@ -67,7 +67,11 @@ const createPayment = async (req, res) => {
       [result.insertId]
     );
 
-    res.status(201).json({ success: true, data: newPayment[0] });
+    res.status(201).json({ 
+      success: true, 
+      data: newPayment[0],
+      paymentId: result.insertId 
+    });
   } catch (error) {
     console.error('Error creating payment:', error);
     res.status(500).json({ success: false, error: error.message });

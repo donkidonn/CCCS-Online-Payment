@@ -146,8 +146,7 @@ function Payment() {
     "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID || "test",
     currency: "PHP",
     intent: "capture",
-    components: "buttons",
-    "disable-funding": "paylater,venmo"
+    vault: false
   };
 
   return (

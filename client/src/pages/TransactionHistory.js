@@ -28,24 +28,31 @@ function TransactionHistory() {
     
     setUser(parsedUser);
 
-    // Fetch transaction history
+    // Fetch transaction history with fresh balance data
     fetchTransactionHistory(parsedUser.id);
   }, [navigate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchTransactionHistory = async (accountId) => {
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/payments/account/${accountId}`);
       
-      if (!response.ok) {
+      // Fetch balance and payments
+      const [balanceResponse, paymentsResponse] = await Promise.all([
+        fetch(`${process.env.REACT_APP_API_URL}/api/accounts/${accountId}/balance`),
+        fetch(`${process.env.REACT_APP_API_URL}/api/payments/account/${accountId}`)
+      ]);
+      
+      if (!balanceResponse.ok || !paymentsResponse.ok) {
         throw new Error('Failed to fetch transaction history');
       }
 
-      const result = await response.json();
+      const balanceResult = await balanceResponse.json();
+      const paymentsResult = await paymentsResponse.json();
       
-      if (result.success) {
-        // Process transactions to calculate pending balance
-        const processedTransactions = processTransactions(result.data);
+      if (paymentsResult.success && balanceResult.success) {
+        // Use balance from database
+        const currentBalance = balanceResult.balance || 0;
+        const processedTransactions = processTransactions(paymentsResult.data, currentBalance);
         setTransactions(processedTransactions);
       } else {
         setError('Unable to load transaction history');
@@ -58,39 +65,42 @@ function TransactionHistory() {
     }
   };
 
-  const processTransactions = (paymentsData) => {
+  const processTransactions = (paymentsData, currentBalance) => {
     if (!paymentsData || paymentsData.length === 0) return [];
+
+    console.log('Current Balance:', currentBalance);
+    console.log('Payments Data:', paymentsData);
 
     // Sort by date ascending to calculate pending correctly
     const sorted = [...paymentsData].sort((a, b) => 
       new Date(a.paid_at) - new Date(b.paid_at)
     );
 
-    // Get initial balance (assuming user object has balance)
-    let currentBalance = user?.balance || 0;
-    
-    // Calculate initial total before any payments
+    // Calculate initial balance before any payments
     const totalPaid = sorted.reduce((sum, payment) => sum + parseFloat(payment.amount_paid || 0), 0);
-    let runningBalance = currentBalance + totalPaid;
+    let runningPending = currentBalance + totalPaid;
 
-    // Process each transaction
+    console.log('Total Paid:', totalPaid);
+    console.log('Initial Pending (before any payments):', runningPending);
+
+    // Process each transaction and calculate pending at that point in time
     const processed = sorted.map(payment => {
       const amountPaid = parseFloat(payment.amount_paid || 0);
-      const pendingAfterPayment = runningBalance - amountPaid;
       
       const transaction = {
         id: payment.payment_id,
         date: new Date(payment.paid_at),
         paid: amountPaid,
-        pending: pendingAfterPayment,
-        transactionId: payment.payment_id.toString().padStart(4, '0').slice(-4)
+        pending: runningPending - amountPaid, // Pending AFTER this payment
+        transactionId: payment.paypal_reference || `Payment #${payment.payment_id}`
       };
 
-      runningBalance = pendingAfterPayment;
+      // Update running balance for next transaction
+      runningPending = runningPending - amountPaid;
       return transaction;
     });
 
-    // Return in descending order (most recent first)
+    // Return in descending order (most recent first) for display
     return processed.reverse();
   };
 
@@ -200,13 +210,13 @@ function TransactionHistory() {
                       {formatDate(transaction.date)}
                     </div>
                     <div className="font-gordita-bold text-green-700 text-sm md:text-base">
-                      Php{transaction.paid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      PHP {transaction.paid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     <div className="font-gordita text-gray-700 text-sm md:text-base">
-                      Php{transaction.pending.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      PHP {transaction.pending.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </div>
                     <div className="font-gordita-bold text-gray-800 text-sm md:text-base">
-                      #{transaction.transactionId}
+                      {transaction.transactionId}
                     </div>
                   </div>
                 ))}
