@@ -11,12 +11,10 @@ import AccountBalance from './pages/AccountBalance';
 import TransactionHistory from './pages/TransactionHistory';
 import AdminStudentAccounts from './pages/AdminStudentAccounts';
 import AdminAddEditBalance from './pages/AdminAddEditBalance';
-import FloatingParticles from './components/FloatingParticles';
 
 function App() {
   return (
     <Router>
-      <FloatingParticles />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
